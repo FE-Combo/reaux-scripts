@@ -4,29 +4,31 @@ const DevServer = require("webpack-dev-server");
 
 function devServer(compiler) {
   return new DevServer(
-  {
-    port: "auto",
-    historyApiFallback: true,
-    client: {},
-    proxy: [
-      {
+    {
+      port: "auto",
+      historyApiFallback: true,
+      client: {},
+      proxy: [
+        {
           context: ["/api"],
           target: "http://192.168.1.1:8080",
           secure: false,
-          pathRewrite:{"^/api": ""},
+          pathRewrite: { "^/api": "" },
           changeOrigin: true,
+        },
+      ],
+      headers: {
+        "Access-Control-Allow-Origin": "*",
       },
-    ],
-    headers: {
-      'Access-Control-Allow-Origin': '*',
     },
-  }, compiler);
+    compiler,
+  );
 }
 
 function start() {
   const compiler = webpack(webpackConfig);
   const server = devServer(compiler);
-  server.listen("auto", "0.0.0.0", error => {
+  server.listen("auto", "0.0.0.0", (error) => {
     if (error) {
       console.error(error);
       process.exit(1);
@@ -34,7 +36,7 @@ function start() {
     return null;
   });
 
-  ["SIGINT", "SIGTERM"].forEach(signal => {
+  ["SIGINT", "SIGTERM"].forEach((signal) => {
     process.on(signal, () => {
       server.close();
       process.exit();

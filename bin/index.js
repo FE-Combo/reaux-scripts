@@ -4,7 +4,7 @@
 
 const chalk = require("chalk");
 const process = require("process");
-const {spawn} = require("../lib");
+const { spawn } = require("../lib");
 
 const args = process.argv;
 

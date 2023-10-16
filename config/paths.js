@@ -7,7 +7,7 @@ function resolveApp(relativePath) {
 }
 
 function resolveOwn(relativePath) {
-  return path.resolve(__dirname, '..', relativePath);
+  return path.resolve(__dirname, "..", relativePath);
 }
 
 module.exports = {
@@ -23,4 +23,4 @@ module.exports = {
   appPackageJson: resolveApp("package.json"),
   appPublic: resolveApp("public"),
   appDist: resolveApp("dist"),
-}
+};

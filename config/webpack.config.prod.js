@@ -5,7 +5,7 @@ const ForkTSCheckerPlugin = require("fork-ts-checker-webpack-plugin");
 const TerserPlugin = require("terser-webpack-plugin");
 const MiniCssExtractPlugin = require("mini-css-extract-plugin");
 const BundleAnalyzerPlugin = require("webpack-bundle-analyzer").BundleAnalyzerPlugin;
-const {appDirectory, appEntry, appDist, appUtils, appComponents, appModules, appHtml} = require("./paths")
+const { appDirectory, appEntry, appDist, appUtils, appComponents, appModules, appHtml } = require("./paths");
 
 const config = [
   {
@@ -26,7 +26,7 @@ const config = [
       alias: {
         utils: appUtils,
         components: appComponents,
-        modules: appModules
+        modules: appModules,
       },
     },
     optimization: {

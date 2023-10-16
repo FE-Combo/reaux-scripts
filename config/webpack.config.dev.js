@@ -4,7 +4,7 @@ const HTMLPlugin = require("html-webpack-plugin");
 const ForkTSCheckerPlugin = require("fork-ts-checker-webpack-plugin");
 const MiniCssExtractPlugin = require("mini-css-extract-plugin");
 const ReactRefreshWebpackPlugin = require("@pmmmwh/react-refresh-webpack-plugin");
-const {appDirectory, appEntry, appUtils, appComponents, appModules, appHtml} = require("./paths")
+const { appDirectory, appEntry, appUtils, appComponents, appModules, appHtml } = require("./paths");
 
 const config = {
   target: "web",
