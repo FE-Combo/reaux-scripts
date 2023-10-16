@@ -1,0 +1,52 @@
+{
+  "name": "reaux-scripts",
+  "version": "0.0.1",
+  "description": "Configuration and scripts for Reaux.",
+  "main": "index.js",
+  "bin": {
+    "rs": "./bin/index.js"
+  },
+  "scripts": {
+    "rs": "node ./bin/index.js",
+    "prettier": "prettier --write ./{scripts,bin,lib,config}/*",
+    "release": "standard-version",
+    "release:beta": "standard-version --prerelease beta",
+    "release:alpha": "standard-version --prerelease alpha",
+    "release:major": "standard-version --release-as major",
+    "release:minor": "standard-version --release-as minor",
+    "release:patch": "standard-version --release-as patch"
+  },
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "chalk": "^4.1.0",
+    "fs-extra": "^11.1.1",
+    "prompts": "^2.4.2",
+    "@pmmmwh/react-refresh-webpack-plugin": "0.5.10",
+    "babel-loader": "^9.0.0",
+    "babel-plugin-import": "^1.13.3",
+    "cross-env": "^7.0.3",
+    "css-loader": "^6.7.1",
+    "file-loader": "^6.2.0",
+    "fork-ts-checker-webpack-plugin": "^7.2.13",
+    "html-webpack-plugin": "^4.5.2",
+    "less": "^4.1.2",
+    "less-loader": "^10.2.0",
+    "mini-css-extract-plugin": "^2.7.2",
+    "postcss-loader": "^7.0.2",
+    "postcss-preset-env": "^8.4.1",
+    "postcss-scss": "^4.0.6",
+    "react-refresh": "^0.14.0",
+    "sass": "^1.49.8",
+    "sass-loader": "^13.1.0",
+    "terser-webpack-plugin": "^5.3.6",
+    "url-loader": "^4.1.1",
+    "webpack": "^5.74.0",
+    "webpack-bundle-analyzer": "^4.8.0",
+    "webpack-dev-server": "^4.11.1"
+  },
+  "devDependencies": {
+    "prettier": "^3.0.3",
+    "standard-version": "^9.5.0"
+  }
+}
