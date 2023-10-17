@@ -23,7 +23,7 @@ function getGitStatus() {
 
 function tryGitAdd(appPath) {
   try {
-    spawn("git", ["add", path.join(appPath, "config"), path.join(appPath, "scripts")]);
+    spawn("git", ["add", appPath]);
     return true;
   } catch (e) {
     console.error(e);
