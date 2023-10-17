@@ -1,6 +1,6 @@
 {
   "name": "reaux-scripts",
-  "version": "0.0.1",
+  "version": "0.1.0",
   "description": "Configuration and scripts for Reaux.",
   "main": "index.js",
   "bin": {
