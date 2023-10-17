@@ -28,12 +28,11 @@ function devServer(compiler) {
 function start() {
   const compiler = webpack(webpackConfig);
   const server = devServer(compiler);
-  server.listen("auto", "0.0.0.0", (error) => {
+  server.startCallback((error) => {
     if (error) {
       console.error(error);
       process.exit(1);
     }
-    return null;
   });
 
   ["SIGINT", "SIGTERM"].forEach((signal) => {

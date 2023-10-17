@@ -142,14 +142,14 @@ const config = [
           ],
         },
         {
-          test: /\.(png|jpg|jpeg|svg|webp|gif|ttf|woff)$/i,
+          test: /\.(png|jpg|jpeg|webp|gif|ttf|woff)$/i,
           type: "asset/resource",
           generator: {
             filename: "static/[path][name].[contenthash].[ext]",
           },
         },
         {
-          test: /\.(png|jpg|jpeg|svg|webp|gif|ttf|woff)$/i,
+          test: /\.(png|jpg|jpeg|webp|gif|ttf|woff)$/i,
           dependency: { not: ["url"] },
           use: [
             {
@@ -163,6 +163,11 @@ const config = [
           type: "javascript/auto",
         },
         {
+          test: /\.svg$/,
+          enforce: 'pre',
+          loader: require.resolve('@svgr/webpack')
+        },
+        {
           test: /\.(mp3|mp4)$/,
           use: [
             {
@@ -173,6 +178,7 @@ const config = [
             },
           ],
         },
+        { test: /\.m?js/, resolve: { fullySpecified: false } }
       ],
     },
     plugins: [
