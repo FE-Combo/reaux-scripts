@@ -2,7 +2,7 @@ const chalk = require("chalk");
 const fs = require("fs-extra");
 const childProcess = require("child_process");
 const webpack = require("webpack");
-const webpackConfig = require("./webpack.config.prod.js");
+const webpackConfig = require("../config/webpack.config.prod.js");
 
 function spawn(command, params, errorMessage) {
   const isWindows = process.platform === "win32"; /* spawn with {shell: true} can solve .cmd resolving, but prettier doesn't run correctly on mac/linux */
