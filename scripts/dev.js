@@ -21,7 +21,7 @@ function devServer(compiler) {
         "Access-Control-Allow-Origin": "*",
       },
     },
-    compiler,
+    compiler
   );
 }
 

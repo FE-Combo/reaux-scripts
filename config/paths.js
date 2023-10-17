@@ -7,7 +7,7 @@ function resolveApp(relativePath) {
   return path.resolve(appDirectory, relativePath);
 }
 // @remove-on-eject-begin
-const ownDirectory = path.resolve(__dirname, "..")
+const ownDirectory = path.resolve(__dirname, "..");
 
 function resolveOwn(relativePath) {
   return path.resolve(ownDirectory, relativePath);

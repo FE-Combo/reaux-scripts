@@ -5,7 +5,7 @@ const execSync = require("child_process").execSync;
 const chalk = require("chalk");
 const { appDirectory, resolveOwn, resolveApp } = require("../config/paths");
 const { spawn } = require("../lib");
-const os = require('os');
+const os = require("os");
 
 const files = ["config/paths.js", "config/webpack.config.dev.js", "config/webpack.config.prod.js", "scripts/build.js", "scripts/dev.js"];
 
@@ -72,8 +72,8 @@ ${chalk.red("Remove untracked files, stash or commit any changes, and try again.
     if (content.match(/\/\/ @remove-file-on-eject/)) {
       return;
     }
-    if(content.match(/\/\/ @remove-on-eject-begin/)) {
-      content = content.replace(/\/\/ @remove-on-eject-begin([\s\S]*?)\/\/ @remove-on-eject-end/gm, '').replace(/-- @remove-on-eject-begin([\s\S]*?)-- @remove-on-eject-end/gm,'');
+    if (content.match(/\/\/ @remove-on-eject-begin/)) {
+      content = content.replace(/\/\/ @remove-on-eject-begin([\s\S]*?)\/\/ @remove-on-eject-end/gm, "").replace(/-- @remove-on-eject-begin([\s\S]*?)-- @remove-on-eject-end/gm, "");
     }
     fs.createFileSync(path.join(appDirectory, file));
     console.info(`Adding ${chalk.cyan(file)} to the project`);
@@ -83,7 +83,7 @@ ${chalk.red("Remove untracked files, stash or commit any changes, and try again.
   const ownPackage = require(resolveOwn("package.json"));
   const appPackage = require(resolveApp("package.json"));
 
-  console.info(chalk.cyan('Updating the dependencies.'));
+  console.info(chalk.cyan("Updating the dependencies."));
 
   const ownPackageName = ownPackage.name;
 
@@ -94,20 +94,20 @@ ${chalk.red("Remove untracked files, stash or commit any changes, and try again.
     }
   }
 
-  if(appPackage.dependencies) {
+  if (appPackage.dependencies) {
     if (appPackage.dependencies[ownPackageName]) {
       console.info(`Removing ${chalk.cyan(ownPackageName)} from dependencies`);
       delete appPackage.dependencies[ownPackageName];
     }
   }
 
-  Object.keys(ownPackage.dependencies).forEach(key => {
-    if(["prompts"].includes(key)) {
+  Object.keys(ownPackage.dependencies).forEach((key) => {
+    if (["prompts"].includes(key)) {
       return;
     }
     console.info(`Adding ${chalk.cyan(key)} to dependencies`);
     if (!appPackage.devDependencies) {
-      appPackage.devDependencies = {}
+      appPackage.devDependencies = {};
     }
     appPackage.devDependencies[key] = ownPackage.dependencies[key];
   });
@@ -115,33 +115,35 @@ ${chalk.red("Remove untracked files, stash or commit any changes, and try again.
   // Sort the devDependencies.
   const unsortedDevDependencies = appPackage.devDependencies;
   appPackage.devDependencies = {};
-  Object.keys(unsortedDevDependencies).sort().forEach(key => (appPackage.devDependencies[key] = unsortedDevDependencies[key]));
+  Object.keys(unsortedDevDependencies)
+    .sort()
+    .forEach((key) => (appPackage.devDependencies[key] = unsortedDevDependencies[key]));
 
-  console.info(chalk.cyan('Updating the scripts'));
+  console.info(chalk.cyan("Updating the scripts"));
 
-  delete appPackage.scripts['eject'];
+  delete appPackage.scripts["eject"];
 
-  ["dev", "build"].forEach(key => {
+  ["dev", "build"].forEach((key) => {
     const binKey = "rs";
-    const regex = new RegExp(binKey + ' (\\w+)', 'g');
+    const regex = new RegExp(binKey + " (\\w+)", "g");
     if (regex.test(appPackage.scripts[key])) {
-      appPackage.scripts[key] = appPackage.scripts[key].replace(regex, 'node scripts/$1.js');
+      appPackage.scripts[key] = appPackage.scripts[key].replace(regex, "node scripts/$1.js");
 
       console.info(`Replacing ${chalk.cyan(`"${binKey} ${key}"`)} with ${chalk.cyan(`"node scripts/${key}.js"`)}`);
-      
-      fs.removeSync(path.join(appDirectory, 'node_modules', '.bin', binKey));
-      fs.removeSync(path.join(appDirectory, 'node_modules', 'reaux-scripts'));
-    }
-  })
 
-  fs.writeFileSync(path.join(appDirectory, 'package.json'), JSON.stringify(appPackage, null, 2) + os.EOL);
+      fs.removeSync(path.join(appDirectory, "node_modules", ".bin", binKey));
+      fs.removeSync(path.join(appDirectory, "node_modules", "reaux-scripts"));
+    }
+  });
+
+  fs.writeFileSync(path.join(appDirectory, "package.json"), JSON.stringify(appPackage, null, 2) + os.EOL);
 
   if (fs.existsSync(resolveApp("yarn.lock"))) {
-    console.log(chalk.cyan('Running yarn...'));
-    spawn("yarnpkg", ['--cwd', process.cwd()])
+    console.log(chalk.cyan("Running yarn..."));
+    spawn("yarnpkg", ["--cwd", process.cwd()]);
   } else {
-    console.log(chalk.cyan('Running npm install...'));
-    spawnSync('npm', ['install', '--loglevel', 'error']);
+    console.log(chalk.cyan("Running npm install..."));
+    spawnSync("npm", ["install", "--loglevel", "error"]);
   }
 
   console.info(chalk.green("Ejected successfully!"));
