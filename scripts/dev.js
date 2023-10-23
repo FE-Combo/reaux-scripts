@@ -3,7 +3,7 @@ const webpack = require("webpack");
 const webpackConfig = require("../config/webpack.config.dev");
 const DevServer = require("webpack-dev-server");
 const {currentWorkingDirectory, } = require("node-wiz");
-const packageJson = require(path(currentWorkingDirectory, "package.json"));
+const packageJson = require(path.join(currentWorkingDirectory, "package.json"));
 const defaultDevServerOptions = {
   port: "auto",
   historyApiFallback: true,

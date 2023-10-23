@@ -27,7 +27,7 @@ module.exports = {
 module.exports = {
   resolveApp,
   resolveOwn,
-  appDirectory,
+  appDirectory: currentWorkingDirectory,
   appEntry: resolveApp("src/index"),
   appUtils: resolveApp("src/utils"),
   appComponents: resolveApp("src/components"),
