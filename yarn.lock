@@ -5321,10 +5321,10 @@ node-releases@^2.0.13:
   resolved "https://registry.yarnpkg.com/node-releases/-/node-releases-2.0.13.tgz#d5ed1627c23e3461e819b02e57b75e4899b1c81d"
   integrity sha512-uYr7J37ae/ORWdZeQ1xxMJe3NtdmqMC/JZK+geofDrkLUApKRHPd18/TxtBOJ4A0/+uUIliorNrfYV6s1b02eQ==
 
-node-wiz@^0.0.2:
-  version "0.0.2"
-  resolved "https://registry.yarnpkg.com/node-wiz/-/node-wiz-0.0.2.tgz#11ad340e5be76475a98ef6547e0242e5cc2f7314"
-  integrity sha512-3faqEa8HMtnd9P9hw0ysYBRpVkLTlu/ogt3adiC/0L4haCn13u5mSl9sdzV7XuyvnAxJchYokQx1ZlWB4I/Qkg==
+node-wiz@^0.0.3:
+  version "0.0.3"
+  resolved "https://registry.yarnpkg.com/node-wiz/-/node-wiz-0.0.3.tgz#abe3115950cc1e23634931a6ee0a7c69e6937755"
+  integrity sha512-LGXWTc2P8yjYPkiKjmsqZ0v7gpquuYW4M1Ao0hMn8N4y930KCtd/bNsXwfnC1HlNETag6xeSy1vIAsXgRQLzoA==
   dependencies:
     chalk "^5.3.0"
     fs-extra "^11.1.1"
