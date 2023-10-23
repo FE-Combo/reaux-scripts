@@ -1,10 +1,8 @@
 const path = require("path");
-const fs = require("fs-extra");
-
-const appDirectory = fs.realpathSync(process.cwd());
+const {currentWorkingDirectory} = require("node-wiz");
 
 function resolveApp(relativePath) {
-  return path.resolve(appDirectory, relativePath);
+  return path.resolve(currentWorkingDirectory, relativePath);
 }
 // @remove-on-eject-begin
 const ownDirectory = path.resolve(__dirname, "..");
@@ -15,7 +13,7 @@ function resolveOwn(relativePath) {
 // @remove-on-eject-end
 module.exports = {
   resolveApp,
-  appDirectory,
+  appDirectory: currentWorkingDirectory,
   appEntry: resolveApp("src/index"),
   appUtils: resolveApp("src/utils"),
   appComponents: resolveApp("src/components"),

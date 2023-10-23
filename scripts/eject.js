@@ -1,35 +1,12 @@
 const fs = require("fs-extra");
 const path = require("path");
 const prompts = require("prompts");
-const execSync = require("child_process").execSync;
 const chalk = require("chalk");
 const { appDirectory, resolveOwn, resolveApp } = require("../config/paths");
-const { spawn } = require("../lib");
+const { getGitStatus, tryGitAdd, tryYarn, tryNpm } = require("node-wiz");
 const os = require("os");
 
 const files = ["config/paths.js", "config/webpack.config.dev.js", "config/webpack.config.prod.js", "scripts/build.js", "scripts/dev.js"];
-
-function getGitStatus() {
-  try {
-    let stdout = execSync(`git status --porcelain`, {
-      stdio: ["pipe", "pipe", "ignore"],
-    }).toString();
-    return stdout.trim();
-  } catch (e) {
-    console.error(e);
-    process.exit(1);
-  }
-}
-
-function tryGitAdd(appPath) {
-  try {
-    spawn("git", ["add", appPath]);
-    return true;
-  } catch (e) {
-    console.error(e);
-    process.exit(1);
-  }
-}
 
 function verifyAbsent(file) {
   if (fs.existsSync(path.join(appDirectory, file))) {
@@ -139,11 +116,11 @@ ${chalk.red("Remove untracked files, stash or commit any changes, and try again.
   fs.writeFileSync(path.join(appDirectory, "package.json"), JSON.stringify(appPackage, null, 2) + os.EOL);
 
   if (fs.existsSync(resolveApp("yarn.lock"))) {
-    console.log(chalk.cyan("Running yarn..."));
-    spawn("yarnpkg", ["--cwd", process.cwd()]);
+    console.info(chalk.cyan("Running yarn..."));
+    tryYarn();
   } else {
-    console.log(chalk.cyan("Running npm install..."));
-    spawnSync("npm", ["install", "--loglevel", "error"]);
+    console.info(chalk.cyan("Running npm install..."));
+    tryNpm()
   }
 
   console.info(chalk.green("Ejected successfully!"));

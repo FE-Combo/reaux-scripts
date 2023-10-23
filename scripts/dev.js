@@ -1,25 +1,24 @@
+const path = require("path");
 const webpack = require("webpack");
 const webpackConfig = require("../config/webpack.config.dev");
 const DevServer = require("webpack-dev-server");
+const {currentWorkingDirectory, } = require("node-wiz");
+const packageJson = require(path(currentWorkingDirectory, "package.json"));
+const defaultDevServerOptions = {
+  port: "auto",
+  historyApiFallback: true,
+  client: {},
+  headers: {
+    "Access-Control-Allow-Origin": "*",
+  },
+}
+const devServerOptions = packageJson.devServerOptions || {};
 
 function devServer(compiler) {
   return new DevServer(
     {
-      port: "auto",
-      historyApiFallback: true,
-      client: {},
-      proxy: [
-        {
-          context: ["/api"],
-          target: "http://192.168.1.1:8080",
-          secure: false,
-          pathRewrite: { "^/api": "" },
-          changeOrigin: true,
-        },
-      ],
-      headers: {
-        "Access-Control-Allow-Origin": "*",
-      },
+      ...defaultDevServerOptions,
+      ...devServerOptions
     },
     compiler
   );
