@@ -18,13 +18,18 @@ function execute() {
   compiler.run((error, stats) => {
     if (error) {
       console.error(error.stack || error);
-      if (error.details) console.error(error.details);
+      if (error.details) {
+        console.error(error.details);
+      }
       process.exit(1);
     } else {
-      const statsJSON = stats.toJson();
+      const statsString = stats.toString({
+        chunks: false, // Makes the build much quieter
+        colors: true, // Shows colors in the console
+      });
 
-      if (statsJSON.errors.length || statsJSON.warnings.length) {
-        console.info(statsJSON);
+      if (stats.hasErrors() || stats.hasWarnings()) {
+        console.error(statsString);
         process.exit(1);
       }
 
