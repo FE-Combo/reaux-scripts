@@ -146,6 +146,7 @@ const config = {
     new ForkTSCheckerPlugin(),
     new webpack.DefinePlugin({
       API_PREFIX: JSON.stringify("/api"),
+      ENV: JSON.stringify(process.env)
     }),
   ],
 };

@@ -192,6 +192,7 @@ const config = [
       }),
       new webpack.DefinePlugin({
         API_PREFIX: JSON.stringify("/api"),
+        ENV: JSON.stringify(process.env)
       }),
       new ForkTSCheckerPlugin(),
       process.env.ANALYZE === "true" ? new BundleAnalyzerPlugin() : null,
