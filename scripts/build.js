@@ -8,7 +8,7 @@ function execute() {
   /* clear console */
   process.stdout.write(process.platform === "win32" ? "\x1B[2J\x1B[0f" : "\x1B[2J\x1B[3J\x1B[H");
   console.info(chalk`{green.bold [task]} {white.bold check code style}`);
-  spawnSync("prettier", ["--config", "prettier.config.js", "--list-different", `**/*.{ts,tsx,less,saas}`], "check code style failed, please format above files");
+  spawnSync("prettier", ["--config", "prettier.config.js", "--list-different", `src/**/*.{ts,tsx,less,saas}`], "check code style failed, please format above files");
 
   console.info(chalk`{green.bold [task]} {white.bold cleanup [dist]}`);
   fs.emptyDirSync("dist");
