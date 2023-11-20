@@ -142,7 +142,7 @@ const config = [
           ],
         },
         {
-          test: /\.(svg|png|jpg|jpeg|webp|gif|ttf|woff)$/i,
+          test: /\.(png|jpg|jpeg|webp|gif|ttf|woff)$/i,
           type: "asset/resource",
           generator: {
             filename: "static/[path][name].[contenthash].[ext]",
@@ -164,8 +164,26 @@ const config = [
         },
         {
           test: /\.svg$/,
-          enforce: 'pre',
-          loader: require.resolve('@svgr/webpack')
+          use: [
+            {
+              loader: require.resolve('@svgr/webpack'),
+              options: {
+                prettier: false,
+                svgo: false,
+                svgoConfig: {
+                  plugins: [{ removeViewBox: false }],
+                },
+                titleProp: true,
+                ref: true,
+              },
+            },
+            {
+              loader: require.resolve('file-loader'),
+              options: {
+                name: "static/[path][name].[contenthash].[ext]",
+              },
+            },
+          ]
         },
         {
           test: /\.(mp3|mp4)$/,
