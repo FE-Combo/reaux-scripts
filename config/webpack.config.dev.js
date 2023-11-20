@@ -97,7 +97,7 @@ const config = {
         ],
       },
       {
-        test: /\.(png|jpg|jpeg|webp|gif|ttf|woff)$/i,
+        test: /\.(svg|png|jpg|jpeg|webp|gif|ttf|woff)$/i,
         type: "asset/resource",
         generator: {
           filename: "static/[path][name].[contenthash].[ext]",
