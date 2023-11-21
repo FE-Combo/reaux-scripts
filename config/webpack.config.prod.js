@@ -17,8 +17,9 @@ const config = [
     output: {
       path: appDist,
       filename: "js/[name].[chunkhash:8].js",
-      publicPath: "/",
+      publicPath: process.env.ASSET_PREFIX || "/",
       chunkFilename: "js/[name].[chunkhash:8].bundle.js",
+      assetModuleFilename: 'static/[path][name].[hash][ext]',
     },
     resolve: {
       extensions: [".ts", ".tsx", ".js", ".jsx", ".less", ".scss", ".sass"],
