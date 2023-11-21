@@ -2,6 +2,13 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+### [0.2.9](https://github.com/FE-Combo/reaux-scripts/compare/v0.2.8...v0.2.9) (2023-11-21)
+
+
+### Features
+
+* 支持动态配置 publicPath ([c382cc8](https://github.com/FE-Combo/reaux-scripts/commit/c382cc8ed4605dedb6269a29870c5a39c7c5d1b7))
+
 ### [0.2.8](https://github.com/FE-Combo/reaux-scripts/compare/v0.2.7...v0.2.8) (2023-11-20)
 
 ### [0.2.7](https://github.com/FE-Combo/reaux-scripts/compare/v0.2.6...v0.2.7) (2023-11-20)
