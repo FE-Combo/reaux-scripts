@@ -14,3 +14,7 @@ rc dev ## 应用启动
 rc build ## 应用打包
 rc eject ## 暴露配置
 ```
+
+### 环境变量
+ASSET_PREFIX: 静态资源前缀
+PORT: 端口号

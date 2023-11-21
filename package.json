@@ -46,6 +46,7 @@
     "lint-staged": "^12.3.4",
     "mini-css-extract-plugin": "^2.7.2",
     "node-wiz": "^0.0.3",
+    "portfinder": "^1.0.32",
     "postcss-loader": "^7.0.2",
     "postcss-preset-env": "^8.4.1",
     "postcss-scss": "^4.0.6",
@@ -61,7 +62,6 @@
     "url-loader": "^4.1.1",
     "webpack": "^5.74.0",
     "webpack-bundle-analyzer": "^4.8.0",
-    "webpack-chain": "^6.5.1",
     "webpack-dev-server": "^4.11.1"
   },
   "devDependencies": {

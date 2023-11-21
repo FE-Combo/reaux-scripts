@@ -4,8 +4,36 @@ const webpackConfig = require("../config/webpack.config.dev");
 const DevServer = require("webpack-dev-server");
 const {currentWorkingDirectory, } = require("node-wiz");
 const packageJson = require(path.join(currentWorkingDirectory, "package.json"));
-const Config = require('webpack-chain');
-const config = new Config();
+const portfinder = require("portfinder");
+const chalk = require("chalk");
+
+const basePort = 8080;
+const port = process.env.PORT ? parseInt(process.env.PORT, 10) : basePort
+portfinder.basePort = port;
+
+try {
+  portfinder.getPort(function (error, nextPort) {
+    if (error) {
+      console.error(error);
+      return;
+    }
+    if (port !== nextPort) {
+      process.env.PORT = nextPort + "";
+      if(!process.env.ASSET_PREFIX) {
+        webpackConfig.output.publicPath = webpackConfig.output.publicPath.replace("{port}", nextPort)
+      }
+      defaultDevServerOptions.port = nextPort;
+      console.info(
+        `${chalk.yellow(
+          "warn"
+        )} - Port ${port} is in use, trying ${nextPort} instead.`
+      );
+    }
+    start();
+  });
+} catch (error) {
+  console.error(error)
+}
 
 const defaultDevServerOptions = {
   port: "auto",
@@ -13,15 +41,6 @@ const defaultDevServerOptions = {
   client: {},
   headers: {
     "Access-Control-Allow-Origin": "*",
-  },
-  onListening: function (devServer) {
-    if(! process.env.ASSET_PREFIX) {
-      // 根据端口号动态设置 publicPath
-      const port = devServer.server.address().port;
-      const updatedPublicPath = `http://localhost:${port}/`;
-      const output = config.output;
-      output.publicPath(updatedPublicPath);
-    }
   },
 }
 const devServerOptions = packageJson.devServerOptions || {};
@@ -53,5 +72,3 @@ function start() {
     });
   });
 }
-
-start();

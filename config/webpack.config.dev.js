@@ -11,7 +11,7 @@ const config = {
   mode: "development",
   entry: [appEntry],
   output: {
-    publicPath: process.env.ASSET_PREFIX || "/",
+    publicPath: process.env.ASSET_PREFIX || `http://localhost:{port}/`,
   },
   resolve: {
     extensions: [".ts", ".tsx", ".js", ".jsx", ".less", ".scss", ".sass"],
