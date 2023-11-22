@@ -2,6 +2,13 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+### [0.3.1](https://github.com/FE-Combo/reaux-scripts/compare/v0.3.0...v0.3.1) (2023-11-22)
+
+
+### Features
+
+* copy public folder ([f5be750](https://github.com/FE-Combo/reaux-scripts/commit/f5be7503572b251b0570d25ddd67df32f2b1f1ec))
+
 ## [0.3.0](https://github.com/FE-Combo/reaux-scripts/compare/v0.2.10...v0.3.0) (2023-11-22)
 
 
