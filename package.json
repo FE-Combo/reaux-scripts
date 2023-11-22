@@ -4,10 +4,10 @@
   "description": "Configuration and scripts for Reaux.",
   "main": "index.js",
   "bin": {
-    "rs": "./bin/index.js"
+    "reaux-scripts": "./bin/index.js"
   },
   "scripts": {
-    "rs": "node ./bin/index.js",
+    "reaux-scripts": "node ./bin/index.js",
     "prettier": "prettier --write ./{scripts,bin,lib,config}/*",
     "release": "standard-version",
     "release:beta": "standard-version --prerelease beta",

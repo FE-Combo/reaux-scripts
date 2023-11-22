@@ -101,7 +101,7 @@ ${chalk.red("Remove untracked files, stash or commit any changes, and try again.
   delete appPackage.scripts["eject"];
 
   ["dev", "build"].forEach((key) => {
-    const binKey = "rs";
+    const binKey = "reaux-scripts";
     const regex = new RegExp(binKey + " (\\w+)", "g");
     if (regex.test(appPackage.scripts[key])) {
       appPackage.scripts[key] = appPackage.scripts[key].replace(regex, "node scripts/$1.js");

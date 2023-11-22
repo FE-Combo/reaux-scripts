@@ -1,6 +1,5 @@
 const path = require("path");
 const webpack = require("webpack");
-const webpackConfig = require("../config/webpack.config.dev");
 const DevServer = require("webpack-dev-server");
 const {currentWorkingDirectory, } = require("node-wiz");
 const packageJson = require(path.join(currentWorkingDirectory, "package.json"));
@@ -17,11 +16,9 @@ try {
       console.error(error);
       return;
     }
+
     if (port !== nextPort) {
       process.env.PORT = nextPort + "";
-      if(!process.env.ASSET_PREFIX) {
-        webpackConfig.output.publicPath = webpackConfig.output.publicPath.replace("{port}", nextPort)
-      }
       defaultDevServerOptions.port = nextPort;
       console.info(
         `${chalk.yellow(
@@ -29,7 +26,13 @@ try {
         )} - Port ${port} is in use, trying ${nextPort} instead.`
       );
     }
-    start();
+
+    if(!process.env.ASSET_PREFIX) {
+      process.env.ASSET_PREFIX = `http://localhost:${nextPort}/`
+    }
+
+    const webpackConfig = require("../config/webpack.config.dev");
+    start(webpackConfig);
   });
 } catch (error) {
   console.error(error)
@@ -55,7 +58,7 @@ function devServer(compiler) {
   );
 }
 
-function start() {
+function start(webpackConfig) {
   const compiler = webpack(webpackConfig);
   const server = devServer(compiler);
   server.startCallback((error) => {

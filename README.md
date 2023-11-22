@@ -10,9 +10,9 @@ npm i reaux-scripts -g
 
 ### 使用
 ```bash
-rc dev ## 应用启动
-rc build ## 应用打包
-rc eject ## 暴露配置
+reaux-scripts dev ## 应用启动
+reaux-scripts build ## 应用打包
+reaux-scripts eject ## 暴露配置
 ```
 
 ### 环境变量
