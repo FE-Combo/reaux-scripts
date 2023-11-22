@@ -2,7 +2,8 @@ const chalk = require("chalk");
 const fs = require("fs-extra");
 const webpack = require("webpack");
 const webpackConfig = require("../config/webpack.config.prod.js");
-const {spawnSync} = require("node-wiz");
+const { appPublic, appDist, appHtml } = require("../config/paths");
+const { spawnSync } = require("node-wiz");
 
 function execute() {
   /* clear console */
@@ -38,4 +39,12 @@ function execute() {
   });
 }
 
+function copyPublicFolder() {
+  fs.copySync(appPublic, appDist, {
+    dereference: true,
+    filter: file => file !== appHtml,
+  });
+}
+
 execute();
+copyPublicFolder();

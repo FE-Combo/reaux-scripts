@@ -16,10 +16,10 @@ const config = [
     },
     output: {
       path: appDist,
-      filename: "js/[name].[chunkhash:8].js",
+      filename: "static/js/[name].[chunkhash:8].js",
       publicPath: process.env.ASSET_PREFIX || "/",
-      chunkFilename: "js/[name].[chunkhash:8].bundle.js",
-      assetModuleFilename: 'static/[path][name].[hash][ext]',
+      chunkFilename: "static/js/[name].[chunkhash:8].bundle.js",
+      assetModuleFilename: 'static/asset/[name].[hash][ext]',
     },
     resolve: {
       extensions: [".ts", ".tsx", ".js", ".jsx", ".less", ".scss", ".sass"],
@@ -146,7 +146,7 @@ const config = [
           test: /\.(png|jpg|jpeg|webp|gif|ttf|woff)$/i,
           type: "asset/resource",
           generator: {
-            filename: "static/[path][name].[contenthash].[ext]",
+            filename: "static/media/[name].[contenthash].[ext]",
           },
         },
         {
@@ -157,7 +157,7 @@ const config = [
               loader: "url-loader",
               options: {
                 limit: 1024,
-                name: "static/[path][name].[contenthash].[ext]",
+                name: "static/media/[name].[contenthash].[ext]",
               },
             },
           ],
@@ -181,7 +181,7 @@ const config = [
             {
               loader: require.resolve('file-loader'),
               options: {
-                name: "static/[path][name].[contenthash].[ext]",
+                name: "static/media/[name].[contenthash].[ext]",
               },
             },
           ]
@@ -192,7 +192,7 @@ const config = [
             {
               loader: "file-loader",
               options: {
-                name: "[path][name].[contenthash].[ext]",
+                name: "static/media/[name].[contenthash].[ext]",
               },
             },
           ],
@@ -206,8 +206,8 @@ const config = [
       }),
       new webpack.ProgressPlugin(),
       new MiniCssExtractPlugin({
-        filename: "css/[name].[chunkhash:8].css",
-        chunkFilename: "css/[name].[chunkhash:8].bundle.css",
+        filename: "static/css/[name].[chunkhash:8].css",
+        chunkFilename: "static/css/[name].[chunkhash:8].bundle.css",
       }),
       new webpack.DefinePlugin({
         API_PREFIX: JSON.stringify("/api"),

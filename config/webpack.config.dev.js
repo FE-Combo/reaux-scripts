@@ -100,7 +100,7 @@ const config = {
         test: /\.(png|jpg|jpeg|webp|gif|ttf|woff)$/i,
         type: "asset/resource",
         generator: {
-          filename: "static/[path][name].[contenthash].[ext]",
+          filename: "static/media/[name].[contenthash].[ext]",
         },
       },
       {
@@ -111,7 +111,7 @@ const config = {
             loader: "url-loader",
             options: {
               limit: 1024,
-              name: "static/[path][name].[contenthash].[ext]",
+              name: "static/media/[name].[contenthash].[ext]",
             },
           },
         ],
@@ -135,7 +135,7 @@ const config = {
           {
             loader: require.resolve('file-loader'),
             options: {
-              name: "static/[path][name].[contenthash].[ext]",
+              name: "static/media/[name].[contenthash].[ext]",
             },
           },
         ]
@@ -146,7 +146,7 @@ const config = {
           {
             loader: "file-loader",
             options: {
-              name: "static/[path][name].[contenthash].[ext]",
+              name: "static/media/[name].[contenthash].[ext]",
             },
           },
         ],
