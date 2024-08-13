@@ -2,7 +2,6 @@ const path = require("path");
 const webpack = require("webpack");
 const HTMLPlugin = require("html-webpack-plugin");
 const ForkTSCheckerPlugin = require("fork-ts-checker-webpack-plugin");
-const MiniCssExtractPlugin = require("mini-css-extract-plugin");
 const ReactRefreshWebpackPlugin = require("@pmmmwh/react-refresh-webpack-plugin");
 const { appDirectory, appEntry, appUtils, appComponents, appModules, appHtml } = require("./paths");
 
@@ -37,32 +36,14 @@ const config = {
       },
       {
         test: /\.css$/i,
-        use: [
-          MiniCssExtractPlugin.loader,
-          "css-loader",
-          {
-            loader: "postcss-loader",
-            options: {
-              postcssOptions: {
-                plugins: [["postcss-preset-env", {}]],
-              },
-            },
-          },
-        ],
+        use: ['style-loader', 'css-loader', 'postcss-loader'],
       },
       {
         test: /\.less$/i,
         use: [
-          MiniCssExtractPlugin.loader,
+          "style-loader",
           "css-loader",
-          {
-            loader: "postcss-loader",
-            options: {
-              postcssOptions: {
-                plugins: [["postcss-preset-env", {}]],
-              },
-            },
-          },
+          "postcss-loader",
           {
             loader: "less-loader",
             options: {
@@ -76,7 +57,7 @@ const config = {
       {
         test: /\.(scss|sass)$/i,
         use: [
-          MiniCssExtractPlugin.loader,
+          "style-loader",
           {
             loader: "css-loader",
             options: {
@@ -85,14 +66,7 @@ const config = {
               },
             },
           },
-          {
-            loader: "postcss-loader",
-            options: {
-              postcssOptions: {
-                plugins: [["postcss-preset-env", {}]],
-              },
-            },
-          },
+          "postcss-loader",
           "sass-loader",
         ],
       },
@@ -158,7 +132,6 @@ const config = {
     new HTMLPlugin({
       template: appHtml,
     }),
-    new MiniCssExtractPlugin(),
     new webpack.ProgressPlugin(),
     new ReactRefreshWebpackPlugin(),
     new ForkTSCheckerPlugin(),
