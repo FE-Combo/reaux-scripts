@@ -2,6 +2,17 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+### 0.3.2 (2024-08-13)
+
+
+### Features
+
+* add proxy options in package.json ([f5f3ea5](https://github-z/FE-Combo/reaux-scripts/commit/f5f3ea51027bb6a602a6befdac761af12082ca3d))
+* copy public folder ([f5be750](https://github-z/FE-Combo/reaux-scripts/commit/f5be7503572b251b0570d25ddd67df32f2b1f1ec))
+* 初始化ASSET_PREFIX & 修改PATH ([ce6c019](https://github-z/FE-Combo/reaux-scripts/commit/ce6c0191356366b30ff58cbe32d924a793e2af8c))
+* 支持动态配置 publicPath ([48f3c0e](https://github-z/FE-Combo/reaux-scripts/commit/48f3c0e92927bfb768b2b859737b5e9323eef26f))
+* 支持动态配置 publicPath ([c382cc8](https://github-z/FE-Combo/reaux-scripts/commit/c382cc8ed4605dedb6269a29870c5a39c7c5d1b7))
+
 ### [0.3.1](https://github.com/FE-Combo/reaux-scripts/compare/v0.3.0...v0.3.1) (2023-11-22)
 
 
