@@ -1,6 +1,8 @@
 const path = require("path");
 const {currentWorkingDirectory} = require("node-wiz");
 
+const sourceDir = process.env.SOURCE_DIR || "src"
+
 function resolveApp(relativePath) {
   return path.resolve(currentWorkingDirectory, relativePath);
 }
@@ -14,10 +16,10 @@ function resolveOwn(relativePath) {
 module.exports = {
   resolveApp,
   appDirectory: currentWorkingDirectory,
-  appEntry: resolveApp("src/index"),
-  appUtils: resolveApp("src/utils"),
-  appComponents: resolveApp("src/components"),
-  appModules: resolveApp("src/modules"),
+  appEntry: resolveApp(`${sourceDir}/index`),
+  appUtils: resolveApp(`${sourceDir}/utils`),
+  appComponents: resolveApp(`${sourceDir}/components`),
+  appModules: resolveApp(`${sourceDir}/modules`),
   appHtml: resolveApp("public/index.html"),
   appPackageJson: resolveApp("package.json"),
   appPublic: resolveApp("public"),
@@ -28,10 +30,10 @@ module.exports = {
   resolveApp,
   resolveOwn,
   appDirectory: currentWorkingDirectory,
-  appEntry: resolveApp("src/index"),
-  appUtils: resolveApp("src/utils"),
-  appComponents: resolveApp("src/components"),
-  appModules: resolveApp("src/modules"),
+  appEntry: resolveApp(`${sourceDir}/index`),
+  appUtils: resolveApp(`${sourceDir}/utils`),
+  appComponents: resolveApp(`${sourceDir}/components`),
+  appModules: resolveApp(`${sourceDir}/modules`),
   appHtml: resolveApp("public/index.html"),
   appPackageJson: resolveApp("package.json"),
   appPublic: resolveApp("public"),
