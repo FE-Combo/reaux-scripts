@@ -22,6 +22,8 @@ reaux-scripts eject ## 暴露配置
 
 如果使用 .ts 或 .tsx 文件，请确保在项目根目录下新建 tsconfig.json 文件来配置 TypeScript 编译选项。
 
+在使用 pnpm 作为包管理工具时，默认的依赖管理策略可能会导致某些依赖无法正确解析。为了确保依赖能够正常解析并按预期工作，在未执行 `pnpm reaux-scripts eject` 之前，需要使用 `pnpm install --shamefully-hoist` 命令强制提升依赖至项目根目录，从而避免潜在的解析问题。
+
 ### 环境变量
 ASSET_PREFIX: 静态资源前缀
 PORT: 端口号
