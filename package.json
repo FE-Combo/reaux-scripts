@@ -8,14 +8,23 @@
   },
   "scripts": {
     "reaux-scripts": "node ./bin/index.js",
-    "prettier": "prettier --write ./{scripts,bin,lib,config}/*",
+    "prettier": "prettier --write ./{scripts,bin,config,examples}/*",
     "release": "standard-version",
     "release:beta": "standard-version --prerelease beta",
     "release:alpha": "standard-version --prerelease alpha",
     "release:major": "standard-version --release-as major",
     "release:minor": "standard-version --release-as minor",
-    "release:patch": "standard-version --release-as patch"
+    "release:patch": "standard-version --release-as patch",
+    "dev": "cross-env SOURCE_DIR=examples STATIC_SOURCE_DIR=examples yarn reaux-scripts dev",
+    "build": "cross-env SOURCE_DIR=examples STATIC_SOURCE_DIR=examples yarn reaux-scripts build"
   },
+  "files": [
+    "bin",
+    "config",
+    "scripts",
+    "package.json",
+    "README.md"
+  ],
   "author": "",
   "license": "ISC",
   "dependencies": {
@@ -62,9 +71,13 @@
     "url-loader": "^4.1.1",
     "webpack": "^5.74.0",
     "webpack-bundle-analyzer": "^4.8.0",
-    "webpack-dev-server": "^4.11.1"
+    "webpack-dev-server": "^5.1.0"
   },
   "devDependencies": {
-    "standard-version": "^9.5.0"
+    "standard-version": "^9.5.0",
+    "@types/react": "^18.3.12",
+    "@types/react-dom": "^18.3.1",
+    "react": "^18.3.1",
+    "react-dom": "^18.3.1"
   }
 }

@@ -120,7 +120,7 @@ ${chalk.red("Remove untracked files, stash or commit any changes, and try again.
     tryYarn();
   } else {
     console.info(chalk.cyan("Running npm install..."));
-    tryNpm()
+    tryNpm();
   }
 
   console.info(chalk.green("Ejected successfully!"));

@@ -1,7 +1,9 @@
 const path = require("path");
-const {currentWorkingDirectory} = require("node-wiz");
+const { currentWorkingDirectory } = require("node-wiz");
 
-const sourceDir = process.env.SOURCE_DIR || "src"
+const sourceDir = process.env.SOURCE_DIR || "src";
+
+const staticSourceDir = process.env.STATIC_SOURCE_DIR || "public";
 
 function resolveApp(relativePath) {
   return path.resolve(currentWorkingDirectory, relativePath);
@@ -20,9 +22,9 @@ module.exports = {
   appUtils: resolveApp(`${sourceDir}/utils`),
   appComponents: resolveApp(`${sourceDir}/components`),
   appModules: resolveApp(`${sourceDir}/modules`),
-  appHtml: resolveApp("public/index.html"),
+  appHtml: resolveApp(`${staticSourceDir}/index.html`),
   appPackageJson: resolveApp("package.json"),
-  appPublic: resolveApp("public"),
+  appPublic: resolveApp(staticSourceDir),
   appDist: resolveApp("dist"),
 };
 // @remove-on-eject-begin
@@ -34,9 +36,9 @@ module.exports = {
   appUtils: resolveApp(`${sourceDir}/utils`),
   appComponents: resolveApp(`${sourceDir}/components`),
   appModules: resolveApp(`${sourceDir}/modules`),
-  appHtml: resolveApp("public/index.html"),
+  appHtml: resolveApp(`${staticSourceDir}/index.html`),
   appPackageJson: resolveApp("package.json"),
-  appPublic: resolveApp("public"),
+  appPublic: resolveApp(staticSourceDir),
   appDist: resolveApp("dist"),
 };
 // @remove-on-eject-end

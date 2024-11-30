@@ -1,9 +1,12 @@
+const fs = require("fs");
 const path = require("path");
 const webpack = require("webpack");
 const HTMLPlugin = require("html-webpack-plugin");
 const ForkTSCheckerPlugin = require("fork-ts-checker-webpack-plugin");
 const ReactRefreshWebpackPlugin = require("@pmmmwh/react-refresh-webpack-plugin");
 const { appDirectory, appEntry, appUtils, appComponents, appModules, appHtml } = require("./paths");
+
+const useTypeScript = fs.existsSync(path.join("tsconfig.json"));
 
 const config = {
   target: "web",
@@ -30,13 +33,25 @@ const config = {
         use: {
           loader: "babel-loader",
           options: {
-            plugins: [require.resolve("react-refresh/babel")],
+            presets: ["@babel/preset-env", "@babel/preset-react", useTypeScript && "@babel/preset-typescript"].filter(_ => _),
+            plugins: [
+              require.resolve("react-refresh/babel"),
+              "@babel/plugin-transform-runtime",
+              "@babel/plugin-transform-react-jsx",
+              useTypeScript && "@babel/plugin-transform-typescript",
+              [
+                "@babel/plugin-proposal-decorators",
+                {
+                  legacy: true,
+                },
+              ],
+            ].filter(_ => _),
           },
         },
       },
       {
         test: /\.css$/i,
-        use: ['style-loader', 'css-loader', 'postcss-loader'],
+        use: ["style-loader", "css-loader", "postcss-loader"],
       },
       {
         test: /\.less$/i,
@@ -95,7 +110,7 @@ const config = {
         test: /\.svg$/,
         use: [
           {
-            loader: require.resolve('@svgr/webpack'),
+            loader: require.resolve("@svgr/webpack"),
             options: {
               prettier: false,
               svgo: false,
@@ -107,12 +122,12 @@ const config = {
             },
           },
           {
-            loader: require.resolve('file-loader'),
+            loader: require.resolve("file-loader"),
             options: {
               name: "static/media/[name].[contenthash].[ext]",
             },
           },
-        ]
+        ],
       },
       {
         test: /\.(mp3|mp4)$/,
@@ -125,7 +140,7 @@ const config = {
           },
         ],
       },
-      { test: /\.m?js/, resolve: { fullySpecified: false } }
+      { test: /\.m?js/, resolve: { fullySpecified: false } },
     ],
   },
   plugins: [
@@ -134,10 +149,10 @@ const config = {
     }),
     new webpack.ProgressPlugin(),
     new ReactRefreshWebpackPlugin(),
-    new ForkTSCheckerPlugin(),
+    useTypeScript ? new ForkTSCheckerPlugin() : null,
     new webpack.DefinePlugin({
       API_PREFIX: JSON.stringify("/api"),
-      ENV: JSON.stringify(process.env)
+      ENV: JSON.stringify(process.env),
     }),
   ],
 };

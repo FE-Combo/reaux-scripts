@@ -1,3 +1,4 @@
+const fs = require("fs");
 const path = require("path");
 const webpack = require("webpack");
 const HTMLPlugin = require("html-webpack-plugin");
@@ -6,6 +7,8 @@ const TerserPlugin = require("terser-webpack-plugin");
 const MiniCssExtractPlugin = require("mini-css-extract-plugin");
 const BundleAnalyzerPlugin = require("webpack-bundle-analyzer").BundleAnalyzerPlugin;
 const { appDirectory, appEntry, appDist, appUtils, appComponents, appModules, appHtml } = require("./paths");
+
+const useTypeScript = fs.existsSync(path.join("tsconfig.json"));
 
 const config = [
   {
@@ -19,7 +22,7 @@ const config = [
       filename: "static/js/[name].[chunkhash:8].js",
       publicPath: process.env.ASSET_PREFIX || "/",
       chunkFilename: "static/js/[name].[chunkhash:8].bundle.js",
-      assetModuleFilename: 'static/asset/[name].[hash][ext]',
+      assetModuleFilename: "static/asset/[name].[hash][ext]",
     },
     resolve: {
       extensions: [".ts", ".tsx", ".js", ".jsx", ".less", ".scss", ".sass"],
@@ -79,6 +82,21 @@ const config = [
           exclude: /node_modules/,
           use: {
             loader: "babel-loader",
+            options: {
+              presets: ["@babel/preset-env", "@babel/preset-react", useTypeScript && "@babel/preset-typescript"].filter(_ => _),
+              plugins: [
+                require.resolve("react-refresh/babel"),
+                "@babel/plugin-transform-runtime",
+                "@babel/plugin-transform-react-jsx",
+                useTypeScript && "@babel/plugin-transform-typescript",
+                [
+                  "@babel/plugin-proposal-decorators",
+                  {
+                    legacy: true,
+                  },
+                ],
+              ].filter(_ => _),
+            },
           },
         },
         {
@@ -167,7 +185,7 @@ const config = [
           test: /\.svg$/,
           use: [
             {
-              loader: require.resolve('@svgr/webpack'),
+              loader: require.resolve("@svgr/webpack"),
               options: {
                 prettier: false,
                 svgo: false,
@@ -179,12 +197,12 @@ const config = [
               },
             },
             {
-              loader: require.resolve('file-loader'),
+              loader: require.resolve("file-loader"),
               options: {
                 name: "static/media/[name].[contenthash].[ext]",
               },
             },
-          ]
+          ],
         },
         {
           test: /\.(mp3|mp4)$/,
@@ -197,7 +215,7 @@ const config = [
             },
           ],
         },
-        { test: /\.m?js/, resolve: { fullySpecified: false } }
+        { test: /\.m?js/, resolve: { fullySpecified: false } },
       ],
     },
     plugins: [
@@ -211,9 +229,9 @@ const config = [
       }),
       new webpack.DefinePlugin({
         API_PREFIX: JSON.stringify("/api"),
-        ENV: JSON.stringify(process.env)
+        ENV: JSON.stringify(process.env),
       }),
-      new ForkTSCheckerPlugin(),
+      useTypeScript ? new ForkTSCheckerPlugin() : null,
       process.env.ANALYZE === "true" ? new BundleAnalyzerPlugin() : null,
     ].filter((_) => _),
   },
